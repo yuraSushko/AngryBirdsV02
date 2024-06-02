@@ -38,6 +38,7 @@ public class OpeningPanle extends JPanel {
 
         this.add(instructionsB);
 
+
 //        this.setVisible(true);
 //        this.setFocusable(true);
 //        this.requestFocus();

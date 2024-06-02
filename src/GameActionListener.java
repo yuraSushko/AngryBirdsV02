@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameActionListener implements MouseListener, MouseMotionListener, ActionListener {
+public class GameActionListener implements MouseListener, MouseMotionListener {
     public boolean lunchBird= false;
     private int xLunch=Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH;
     private int yLunch=Constans.HIGHT/2;
@@ -18,9 +18,7 @@ public class GameActionListener implements MouseListener, MouseMotionListener, A
         this.birds=birds;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        Window.latestClicked=(JButton) e.getSource();
-    }
+
     public int getxPulsPlusAmt(){
         return this.xPulsPlusAmt;
     }
@@ -30,9 +28,6 @@ public class GameActionListener implements MouseListener, MouseMotionListener, A
     }
 
 
-    public void mouseClicked(MouseEvent e) {
-
-    }
 
     public void mousePressed(MouseEvent e) {
             yLunch = Constans.HIGHT/2;
@@ -70,18 +65,9 @@ public class GameActionListener implements MouseListener, MouseMotionListener, A
                 currBird.moveRight(xPulsPlusAmt);
             }
 
-
-
         }
     }
 
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    public void mouseExited(MouseEvent e) {
-
-    }
 
     public void mouseDragged(MouseEvent e) {
         System.out.println("dragging");
@@ -95,6 +81,18 @@ public class GameActionListener implements MouseListener, MouseMotionListener, A
     }
 
     public void mouseMoved(MouseEvent e) {
+
+    }
+
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    public void mouseClicked(MouseEvent e) {
 
     }
 }
