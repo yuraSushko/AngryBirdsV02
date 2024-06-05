@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public class Window extends JFrame {
     static String latestClickedButton;
@@ -15,7 +14,7 @@ public class Window extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panelChencherListner = new PanelChencherListner();
-        latestClickedButton= "EMPTY";//Constans.EXIT_BUTTON_TEXT;
+        latestClickedButton= "EMPTY";
         this.openningPanel = new OpeningPanle(0,0,Constans.WIDTH, Constans.HIGHT);
         this.openningPanel.getPlayB().addActionListener(panelChencherListner);
         this.openningPanel.getInstructionsB().addActionListener(panelChencherListner);
@@ -23,10 +22,11 @@ public class Window extends JFrame {
 
         openningPanel.setVisible(true);
         this.mainScene = new MainScene(0,0,Constans.WIDTH, Constans.HIGHT);
-        //this.mainScene.getExit().addActionListener(panelChencherListner);
+        this.mainScene.getExitButton().addActionListener(panelChencherListner);
         this.add(mainScene);
         mainScene.setVisible(false);
         this.instructionsPanel = new InstructionsPanel(0,0,Constans.WIDTH, Constans.HIGHT);
+        this.instructionsPanel.getExitButton().addActionListener(panelChencherListner);
         this.add(instructionsPanel);
         instructionsPanel.setVisible(false);
         this.repaint();
@@ -74,8 +74,6 @@ public class Window extends JFrame {
 
 
 
-    public void setCorrectPannelVisable(JPanel a ){
 
-    }
 
 }

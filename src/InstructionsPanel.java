@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 public class InstructionsPanel  extends JPanel {
 
 
@@ -15,10 +13,10 @@ public class InstructionsPanel  extends JPanel {
             this.backroundOpenening = new ImageIcon(getClass().getResource("resources/angryBirdsInstructions.png")).getImage();
             this.setLayout(null);
             this.exit =new JButton(Constans.EXIT_BUTTON_TEXT);
-            exit.setBounds(Constans.INSTRUCTIONS_SCREEN_EXIT_BUTTON_X
-                    ,Constans.OPENINIG_SCREEN_PLAY_BUTTON_Y
-                    ,Constans.INSTRUCTIONS_SCREEN_EXIT_BUTTON_WIDTH
-                    ,Constans.INSTRUCTIONS_SCREEN_EXIT_BUTTON_HIGHT);
+            exit.setBounds(Constans.EXIT_BUTTON_X
+                    ,Constans.EXIT_BUTTON_Y
+                    ,Constans.EXIT_BUTTON_WIDTH
+                    ,Constans.EXIT_BUTTON_HIGHT);
             exit.setFont(new Font("Tahoma", Font.PLAIN, 20));
             exit.setContentAreaFilled(false);
             exit.setBorderPainted(false);
@@ -32,8 +30,11 @@ public class InstructionsPanel  extends JPanel {
 
         }
 
+    public JButton getExitButton() {
+        return exit;
+    }
 
-        protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(this.backroundOpenening,0,0,Constans.WIDTH,Constans.HIGHT,this);
 

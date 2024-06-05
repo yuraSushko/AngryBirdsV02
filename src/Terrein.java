@@ -9,7 +9,9 @@ public class Terrein  {
         this.pillers = new ArrayList<>();
         this.slingshot = new ArrayList<>();
     }
-
+    public ArrayList<Rectangle> getPillers(){
+        return this.pillers;
+    }
 
 
 
@@ -50,9 +52,9 @@ public class Terrein  {
     }
 
     void randomTerreain(){
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             int pillerHight= random(Constans.MIN_TERRAIN_HIGHT,Constans.MAX_TERRAIN_HIGHT);
-            pillers.add( new Rectangle(300+i*100,
+            pillers.add( new Rectangle(400+i*100,
                     Constans.HIGHT-pillerHight ,
                     Constans.PILLER_WIDTH,pillerHight));
         }

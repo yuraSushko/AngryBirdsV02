@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class OpeningPanle extends JPanel {
 
@@ -10,9 +9,9 @@ public class OpeningPanle extends JPanel {
     private JButton instructionsB;
     public OpeningPanle(int x, int y, int width, int height) {
         this.setBounds(x, y, width, height);
-        this.setBackground(Color.BLACK);
-//        this.backroundOpenening = new ImageIcon(getClass().getResource("resources/angryBirdsStartPage.png")).getImage();
-        this.backroundOpenening = new ImageIcon(getClass().getResource("resources/angryBirdsInstructions.png")).getImage();
+        this.setBackground(Color.BLACK);//angryBirdsInstructions // angryBirdsStartPage.png
+//        this.backroundOpenening = new ImageIcon(getClass().getResource("resources/angryBirdsInstructions.png")).getImage();
+        this.backroundOpenening = new ImageIcon(getClass().getResource("resources/angryBirdsOpeneing.jpg")).getImage();
         this.setLayout(null);
         this.playB =new JButton(Constans.PLAY_BUTTON_TEXT);
         playB.setBounds(Constans.OPENINIG_SCREEN_PLAY_BUTTON_X

@@ -7,9 +7,10 @@ public class Constans {
     public static final int MIN_NUM_OPP=2;
     public static final int MAX_NUM_OPP=10;
     public static final int MIN_SIZE_HIGHT_CHAR=10;
-    public static final int MAX_SIZE_HIGHT_CHAR=20;
-    public static final int MIN_SIZE_WIDTH_CHAR=10;
-    public static final int MAX_SIZE_WIDTH_CHAR=20;
+    public static final int HIGHT_CHARACTER=30;
+    public static final int WIDTH_CHARACTER=30;//20
+    public static final String PIG_IMAGE_PATH="resources/angryBirdsPigPic_transperent.png";
+    public static final String BIRD_REGULAR_IMAGE_PATH="resources/angryBirdsMainBirdPic_transperent.png";
     public static final int MIN_TERRAIN_HIGHT=100;
     public static final int MAX_TERRAIN_HIGHT=500;
     public static final int NUMBER_OF_PILLERS=4;
@@ -29,11 +30,10 @@ public class Constans {
     public static final int OPENINIG_SCREEN_INSTRUCTIONS_BUTTON_Y=300;
     public static final int OPENINIG_SCREEN_BOTH_BUTTON_WIDTH=300;
     public static final int OPENINIG_SCREEN_BOTH_BUTTON_HIGHT=100;
-
-    public static final int INSTRUCTIONS_SCREEN_EXIT_BUTTON_X=0;
-    public static final int INSTRUCTIONS_SCREEN_EXIT_BUTTON_Y=0;
-    public static final int INSTRUCTIONS_SCREEN_EXIT_BUTTON_WIDTH=100;
-    public static final int INSTRUCTIONS_SCREEN_EXIT_BUTTON_HIGHT=100;
+    public static final int EXIT_BUTTON_X=725;
+    public static final int EXIT_BUTTON_Y=0;
+    public static final int EXIT_BUTTON_WIDTH=75;
+    public static final int EXIT_BUTTON_HIGHT=30;
     public static final Color EXIT_BUTTON_COLOR=Color.gray;
     public static final Color PLAY_BUTTON_COLOR=Color.red;
     public static final Color INSTRUCTIONS_BUTTON_COLOR=Color.red;

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -61,8 +60,21 @@ public class GameActionListener implements MouseListener, MouseMotionListener {
             yPulsPlusAmt= ( Constans.HIGHT/2-yLunch  )/10;
             System.out.println(yPulsPlusAmt);
             if(currBird!=null){
-                currBird.moveUp(yPulsPlusAmt);
-                currBird.moveRight(xPulsPlusAmt);
+                int cnt=0;
+                System.out.println(currBird.withinBounds()+ "within bounds");
+                System.out.println(!currBird.collisionWithPiller() + "not colssion ");
+                while (/*cnt<10*/ currBird.withinBounds() && !currBird.collisionWithPiller()) { //TODO action not printing on screen because not in Thered
+                    System.out.println("moving");
+                    currBird.moveUp(yPulsPlusAmt);
+                    currBird.moveRight(xPulsPlusAmt);
+                    cnt++;
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
             }
 
         }
