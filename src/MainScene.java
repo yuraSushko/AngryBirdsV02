@@ -57,12 +57,12 @@ public class MainScene extends JPanel {
         g.drawImage(this.backroundMainGame,0,0,Constans.WIDTH,Constans.HIGHT,this);
 
         for(Pig c : this.characters) {
-            c.drawCharacter(g, Color.GREEN);
+            c.drawCharacter(g );
         }
         terrein.printPiller(g);
         terrein.printSlingshot(g);
         for(Bird bird : this.birds) {
-            bird.drawCharacter(g, Color.RED);
+            bird.drawCharacter(g);
         }
 
     }
