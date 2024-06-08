@@ -14,8 +14,11 @@ public class Constans {
     public static final String MAIN_SCENE_BACK_IMG="resources/angryBirdsGrassImages.png";
 
 
+
+    public static final int PUT_BIRD_ON_SLIG_X=Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH/2 - Constans.WIDTH_CHARACTER/2;
+    public static final int PUT_BIRD_ON_SLIG_Y=Constans.WINDOW_HIGHT-(Constans.SLING_SHOT_HIGHT+Constans.HIGHT_CHARACTER);
     public static final int MIN_TERRAIN_HIGHT=100;
-    public static final int MAX_TERRAIN_HIGHT=500;
+    public static final int MAX_TERRAIN_HIGHT=400;
     public static final int NUMBER_OF_PILLERS=4;
     public static final int PILLER_WIDTH=30;
     public static final int SLING_SHOT_HIGHT=250;
@@ -23,6 +26,14 @@ public class Constans {
     public static final int SLING_SHOT_ARM_LENGTH=60;
     public static final int SLING_SHOT_ARM_WIDTH=20;
     public static final int SLING_SHOT_LOCATION_X=100;
+    public static final int SLING_BASE_WIDTH=160;
+
+
+    public static final int REST_BENCH_X=0;
+    public static final int REST_BENCH_Y=(int) (Constans.HIGHT_CHARACTER*1.1);
+    public static final int REST_BENCH_WIDTH=(int) (Constans.WIDTH_CHARACTER*4.5);
+    public static final int REST_BENCH_HIGHT=Constans.HIGHT_CHARACTER/2;
+
     public static final String PLAY_BUTTON_TEXT ="play";
     public static final String INSTRUCTIONS_BUTTON_TEXT="instructions";
     public static final String EXIT_BUTTON_TEXT="exit";

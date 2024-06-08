@@ -14,7 +14,6 @@ public class Character extends JComponent {
     private int moveUpIncremet;
     private int moveRightIncremet;
     private BufferedImage regualrBirdImapge;
-    private boolean wasLunched;
 
     public Character(int sizeWidth, int sizeHight,int x, int y, String imagePath) {
         this.sizeWidth = sizeWidth;
@@ -24,7 +23,6 @@ public class Character extends JComponent {
         this.timePartInFalling=0;
         this.moveRightIncremet=0;
         this.moveUpIncremet=0;
-        this.wasLunched=false;
         try {
             regualrBirdImapge =ImageIO.read(getClass().getResource(imagePath));
         } catch (IOException ex) {
@@ -45,12 +43,8 @@ public class Character extends JComponent {
     }
 
     void gravity(){
-        // else if bottom of screen
-        // else you can continue fallig
-        //timePartInFalling++;
 
         if(this.x>Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH){
-            //if(this.y + (0.2*timePartInFalling) <= Constans.WINDOW_HIGHT - (this.sizeHight + Constans.WINDOW_INSET) ) {
             if( !collisionWithBottom()){
                 if(!collisionWithPiller()) {
                     this.y += 0.2 * timePartInFalling;
@@ -64,8 +58,8 @@ public class Character extends JComponent {
 
     public boolean withinBounds(){
         boolean within = false;
-        if(this.x>= 0  && this.x<=Constans.WINDOW_WIDTH){
-            if(this.y>=0-Constans.HIGHT_CHARACTER*4 && this.y<=Constans.WINDOW_WIDTH-Constans.HIGHT_CHARACTER){
+        if(this.x>= 0 -Constans.WINDOW_WIDTH/4   && this.x<=Constans.WINDOW_WIDTH){
+            if(this.y>=0-Constans.WINDOW_HIGHT && this.y<=Constans.WINDOW_WIDTH-Constans.HIGHT_CHARACTER){
                 within=true;
             }
         }

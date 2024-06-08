@@ -3,96 +3,92 @@ import java.util.ArrayList;
 
 public class GameActionListener implements MouseListener, MouseMotionListener {
     public boolean lunchBird= false;
-    private int xLunch=Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH;
-    private int yLunch=Constans.WINDOW_HIGHT/2;
+    private int xLocationRealsedBird;//=Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH/2 - Constans.WIDTH_CHARACTER/2;
+    private int yLocationRealsedBird;//=Constans.WINDOW_HIGHT-(Constans.SLING_SHOT_HIGHT+Constans.HIGHT_CHARACTER);
     private int xPulsPlusAmt=0; // incriment for x+= amount
     private int yPulsPlusAmt=0; // incriment for y+= amount
-    private ArrayList</*Bird*/Character> birds;
-    boolean canPutBirdInLunchPad=true;
-    boolean birdInLuchPad= false;
-    private /*Bird*/ Character currBird;
+    private ArrayList<Character> birds;
+    private Character currBird;
+    private boolean birdCilkedAtSlig;
 
 
-    public GameActionListener(ArrayList</*Bird*/Character> birds){
-        this.birds=birds;  //TODO change to static becaues fluid
+    public GameActionListener(){
+        //this.birds=birds;  //TODO change to static becaues fluid
     }
 
-
-/*    public int getxPulsPlusAmt(){
-        return this.xPulsPlusAmt;
+    public Character getCurrBird(){
+        return this.currBird;
     }
-    public int getyPulsPlusAmt(){
-        return this.yPulsPlusAmt;
-    }*/
 
+    public void setBirdsList(ArrayList<Character> birds){
+        this.birds=birds;
+    }
+    public void removeOneBird(Character bird){
+        if(bird!=null) {
+            this.currBird = null;
+            //this.birds.remove(bird);
+            this.birds.remove(currBird);
+            // TODO remove currBird insted
+        }
+
+    }
 
 
     public void mousePressed(MouseEvent e) {
-            yLunch = Constans.WINDOW_HIGHT-(Constans.SLING_SHOT_HIGHT+Constans.HIGHT_CHARACTER) ;  //Constans.WINDOW_HIGHT/2;
-            xLunch = Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH/2 - Constans.WIDTH_CHARACTER/2;
-            int count=0;
-            for(/*Bird*/ Character b : birds) {
-                if (b.getCharacterAsRectangle().contains(70+40, 300)){count++;}
-            }
-            if(count==0){canPutBirdInLunchPad=true;}
-            for(/*Bird*/ Character b : birds) {
-                if (b.getCharacterAsRectangle().contains(e.getPoint()) && e.getX() < 200 && e.getY() < 100) {
-                    System.out.println("in range for chosing");
-                    if(canPutBirdInLunchPad) {
-                        b.setLocation(xLunch, yLunch);
-                        currBird=b;
-                        System.out.println("location was set");
-                        canPutBirdInLunchPad=false;
-                        birdInLuchPad=true;
-                    }
+
+
+         yLocationRealsedBird =0;
+         xLocationRealsedBird =0;
+         int countBirdsOnSling=0;
+         for(Character b : birds) {
+                System.out.println(b);
+                if (b.getCharacterAsRectangle().contains(Constans.PUT_BIRD_ON_SLIG_X, Constans.PUT_BIRD_ON_SLIG_Y)){
+                    countBirdsOnSling++; break;
                 }
             }
+         for( Character b : birds) {
+                if (b.getCharacterAsRectangle().contains(e.getPoint())
+                        && e.getX() <= Constans.REST_BENCH_WIDTH && e.getY() <=Constans.REST_BENCH_HIGHT) {
+                    System.out.println("in range for chosing");
+                    if(countBirdsOnSling==0 && this.currBird==null) {
+                        b.setLocation(Constans.PUT_BIRD_ON_SLIG_X, Constans.PUT_BIRD_ON_SLIG_Y);
+                        currBird=b;
+                        System.out.println("location was set");
+                    }
+                }
+         }
+         if(currBird!=null  && currBird.getCharacterAsRectangle().contains(e.getPoint())){
+             birdCilkedAtSlig=true;
+         }
+         else{birdCilkedAtSlig=false;}
     }
 
     public void mouseReleased(MouseEvent e) {
         System.out.println(lunchBird);
-        if(e.getX()<Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH
-                && e.getY()>Constans.WINDOW_HIGHT/2  // slingshot hight plussome val
-        ) {
-            xPulsPlusAmt = (Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH -  xLunch) / 10;
+        if(xLocationRealsedBird!=0 || yLocationRealsedBird!=0){
+            if(e.getX()<Constans.SLING_SHOT_LOCATION_X){
+            xPulsPlusAmt = (Constans.SLING_SHOT_LOCATION_X + Constans.SLING_SHOT_WIDTH - xLocationRealsedBird) / 10;
             System.out.println(xPulsPlusAmt);
-            yPulsPlusAmt= ( Constans.WINDOW_HIGHT/2-yLunch  )/10;
+            yPulsPlusAmt = (Constans.WINDOW_HIGHT / 2 - yLocationRealsedBird) / 10;
             System.out.println(yPulsPlusAmt);
-            if(currBird!=null){
-                int cnt=0;
-                System.out.println(currBird.withinBounds()+ "within bounds");
+            if (currBird != null) {
+                System.out.println(currBird.withinBounds() + "within bounds");
                 System.out.println(!currBird.collisionWithPiller() + "not colssion ");
-                //TODO action not printing on screen because not in Thered
                 currBird.setMoveRightIncremet(xPulsPlusAmt);
                 currBird.setMoveUpIncremet(yPulsPlusAmt);
-                /*
 
-
-                while ( currBird.withinBounds() && !currBird.collisionWithPiller()) {
-                    System.out.println("moving");
-                    currBird.moveUp(yPulsPlusAmt);
-                    currBird.moveRight(xPulsPlusAmt);
-                    cnt++;
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }*/
             }
-
+        }
         }
     }
 
 
     public void mouseDragged(MouseEvent e) {
-        System.out.println("dragging");
-        System.out.println(lunchBird);
-        if(e.getX()<Constans.SLING_SHOT_WIDTH+Constans.SLING_SHOT_WIDTH
-                && e.getY()>Constans.WINDOW_HIGHT/2  // slingshot hight plussome val
-        ) {
-            yLunch = e.getY();
-            xLunch = e.getX();
+
+         if(e.getX()<Constans.SLING_SHOT_LOCATION_X &&birdCilkedAtSlig){
+            yLocationRealsedBird = e.getY();
+            xLocationRealsedBird = e.getX();
+            currBird.setLocation(xLocationRealsedBird,yLocationRealsedBird);
         }
     }
 

@@ -37,15 +37,15 @@ public class Terrein  extends JComponent {
 
 
     void restBench(){
-        this.restBench = new Rectangle(0, (int) (Constans.HIGHT_CHARACTER*1.1), (int) (Constans.WIDTH_CHARACTER*4.5),Constans.HIGHT_CHARACTER/2);
+        this.restBench = new Rectangle(Constans.REST_BENCH_X, Constans.REST_BENCH_Y, Constans.REST_BENCH_WIDTH,Constans.REST_BENCH_HIGHT);
     }
 
+
+
     void bottom(){
-        //this.bottom = new Rectangle(0,Constans.WINDOW_HIGHT-(Constans.WINDOW_INSET +Constans.HIGHT_CHARACTER/3),Constans.WINDOW_WIDTH,100);//Constans.HIGHT_CHARACTER/3
         this.bottom = new Rectangle(0,Constans.WINDOW_HIGHT-(Constans.WINDOW_INSET+Constans.HIGHT_CHARACTER/2),Constans.WINDOW_WIDTH,30);//Constans.HIGHT_CHARACTER/3
 
 
-        System.out.println(this.bottom);
     }
     void printBottom(Graphics g){
         g.drawImage(grassImg,bottom.x, bottom.y, bottom.width, bottom.height,this);
@@ -54,25 +54,48 @@ public class Terrein  extends JComponent {
 
 
     void slingshot(){
+
+        // middle Main
         slingshot.add(new Rectangle(Constans.SLING_SHOT_LOCATION_X,
                 Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT,
                 Constans.SLING_SHOT_WIDTH,
                 Constans.SLING_SHOT_HIGHT
                 ));
 
+        //horisontal base
+        slingshot.add(new Rectangle(
+                Constans.SLING_SHOT_LOCATION_X-  Constans.SLING_BASE_WIDTH/2 + Constans.SLING_SHOT_WIDTH/2  ,
+                slingshot.get(0).y  ,
+                Constans.SLING_BASE_WIDTH,
+                Constans.SLING_SHOT_ARM_WIDTH ));
+        // left arm
+        slingshot.add(new Rectangle(
+                slingshot.get(1).x,
+                slingshot.get(1).y - Constans.SLING_SHOT_ARM_LENGTH/2,
+                Constans.SLING_SHOT_ARM_WIDTH,
+                Constans.SLING_SHOT_ARM_LENGTH
+        ));
+        // right arm
+        slingshot.add(new Rectangle(
+                slingshot.get(1).x +slingshot.get(1).width - Constans.SLING_SHOT_ARM_WIDTH ,
+                slingshot.get(1).y - Constans.SLING_SHOT_ARM_LENGTH/2,
+                Constans.SLING_SHOT_ARM_WIDTH,
+                Constans.SLING_SHOT_ARM_LENGTH
 
-        slingshot.add(new Rectangle(Constans.SLING_SHOT_LOCATION_X-Constans.SLING_SHOT_ARM_LENGTH,
-                Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT - Constans.SLING_SHOT_ARM_WIDTH,
-                Constans.SLING_SHOT_ARM_LENGTH*2 + Constans.SLING_SHOT_WIDTH, Constans.SLING_SHOT_ARM_WIDTH));
+        ));
 
-        slingshot.add(new Rectangle(Constans.SLING_SHOT_LOCATION_X-Constans.SLING_SHOT_ARM_LENGTH,
-                Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT - Constans.SLING_SHOT_ARM_WIDTH*3,
-                Constans.SLING_SHOT_ARM_WIDTH,Constans.SLING_SHOT_ARM_WIDTH*3));
-
-        slingshot.add(new Rectangle(Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_ARM_LENGTH*2 - 20,
-                Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT - Constans.SLING_SHOT_ARM_WIDTH*3,
-                Constans.SLING_SHOT_ARM_WIDTH,Constans.SLING_SHOT_ARM_WIDTH*3));
     }
+
+    void paintSlingshotString(Graphics g , int xStart, int yStart){
+        g.setColor(Color.BLACK);
+        g.drawLine(xStart+Constans.WIDTH_CHARACTER/2,yStart+Constans.HIGHT_CHARACTER/2,
+                Constans.PUT_BIRD_ON_SLIG_X+ Constans.WIDTH_CHARACTER/2,
+                Constans.PUT_BIRD_ON_SLIG_Y+Constans.HIGHT_CHARACTER/2);
+
+
+    }
+
+
 
     void printSlingshot(Graphics g){
         g.setColor(Color.MAGENTA);
@@ -80,10 +103,8 @@ public class Terrein  extends JComponent {
             g.fillRect(part.x, part.y, part.width,part.height);
         }
         g.setColor(Color.BLACK);
-        g.drawLine(Constans.SLING_SHOT_LOCATION_X-70 +20,
-                Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT - 20*2,
-                Constans.SLING_SHOT_LOCATION_X+70*2 - 20,
-                Constans.WINDOW_HIGHT-Constans.SLING_SHOT_HIGHT - 20*2);
+        g.fillRect (slingshot.get(1).x,slingshot.get(2).y+slingshot.get(2).height/4,slingshot.get(1).width,2);
+       // g.drawLine();
 
     }
 

@@ -7,11 +7,8 @@ import java.util.Random;
 
 public class MainScene extends JPanel {
 
-    //private ArrayList<Pig> pigs;
-    //private ArrayList<Bird> birds;
     private ArrayList<Character> pigs;
     private ArrayList<Character> birds;
-    private int counterThrown;
     public static Terrein terrein;
     private GameActionListener gameActionListener;
     private Image backroundMainGame;
@@ -37,11 +34,12 @@ public class MainScene extends JPanel {
         this.backroundMainGame = new ImageIcon(Objects.requireNonNull(getClass().getResource(Constans.MAIN_SCENE_BACK_IMG))).getImage();
         this.addPigsOnPillers();
         this.addBirds();
-        this.mainGameLoop();
-        this.gameActionListener = new GameActionListener(birds);
+
+        this.gameActionListener = new GameActionListener();
+        gameActionListener.setBirdsList(this.birds);
         this.addMouseListener(gameActionListener);
         this.addMouseMotionListener(gameActionListener); // for drag
-
+        this.mainGameLoop();
 
 
     }
@@ -63,7 +61,9 @@ public class MainScene extends JPanel {
         }
         terrein.printRestBench(g);
         terrein.printBottom(g);
-
+        if(gameActionListener.getCurrBird()!=null) {
+            terrein.paintSlingshotString(g,gameActionListener.getCurrBird().getX(), gameActionListener.getCurrBird().getY());
+        }
     }
 
 
@@ -72,9 +72,10 @@ public class MainScene extends JPanel {
 
             new Thread(() -> {
                 try {
-                    /*Bird*/ Character birdToRemove=null;
-                    /*Bird*/ Character pigToRemove=null;
+                    Character birdToRemove=null;
+                    Character pigToRemove=null;
                     while (true) {
+                        System.out.println(gameActionListener.getCurrBird() + " curr bird");
                         for (Character c : this.pigs  )  {
                             for( Character birdCol : this.birds) {
                                 if(c.getCharacterAsRectangle().intersects(birdCol.getCharacterAsRectangle())){
@@ -95,6 +96,7 @@ public class MainScene extends JPanel {
                         }
                         birds.remove(birdToRemove);
                         pigs.remove(pigToRemove);
+                        gameActionListener.removeOneBird(birdToRemove);
                         birdToRemove=null; pigToRemove=null;
 
                         if(this.birds.size()==0){
@@ -123,6 +125,7 @@ public class MainScene extends JPanel {
 
     public void restokBirds(){
         this.addBirds();
+        gameActionListener.setBirdsList(this.birds);
     }
 
 
@@ -131,12 +134,11 @@ public class MainScene extends JPanel {
         for (int i = 0; i <Constans.NUMBER_OF_BIRDS; i++) {
             birds.add(new Bird(Constans.WIDTH_CHARACTER,
                     Constans.HIGHT_CHARACTER,
-                    (int) (i*Constans.HIGHT_CHARACTER *1.2  +50),// BUFFER
+                    (int) (i*Constans.HIGHT_CHARACTER *1.2 ),// BUFFER
                                 0,Constans.BIRD_REGULAR_IMAGE_PATH));
 
         }
     }
-//addCharchters
     public void addPigsOnPillers() {
         this.pigs = new ArrayList<>();
         for (int i = 0; i < terrein.getPillers().size(); i++) {
@@ -149,17 +151,5 @@ public class MainScene extends JPanel {
             System.out.println(pigs.get(i));
         }
     }
-
-    public int rndNum(int min,int max ){
-        return  new Random().nextInt(min,max+1);
-    }
-
-
-
-
-
-
-
-
 
 }
