@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class Window extends JFrame {
     static String latestClickedButton;
@@ -6,31 +8,33 @@ public class Window extends JFrame {
     private MainScene mainScene;
     private InstructionsPanel instructionsPanel;
     private PanelChencherListner panelChencherListner;
-    public Window() {
+    public Window() throws IOException {
         this.setLayout(null);
         this.setResizable(false);
-        this.setSize(Constans.WIDTH, Constans.HIGHT);
+        this.setSize(Constans.WINDOW_WIDTH, Constans.WINDOW_HIGHT);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.panelChencherListner = new PanelChencherListner();
         latestClickedButton= "EMPTY";
-        this.openningPanel = new OpeningPanle(0,0,Constans.WIDTH, Constans.HIGHT);
+        this.openningPanel = new OpeningPanle(0,0,Constans.WINDOW_WIDTH, Constans.WINDOW_HIGHT);
         this.openningPanel.getPlayB().addActionListener(panelChencherListner);
         this.openningPanel.getInstructionsB().addActionListener(panelChencherListner);
         this.add(openningPanel);
 
         openningPanel.setVisible(true);
-        this.mainScene = new MainScene(0,0,Constans.WIDTH, Constans.HIGHT);
+        this.mainScene = new MainScene(0,0,Constans.WINDOW_WIDTH, Constans.WINDOW_HIGHT);
         this.mainScene.getExitButton().addActionListener(panelChencherListner);
         this.add(mainScene);
         mainScene.setVisible(false);
-        this.instructionsPanel = new InstructionsPanel(0,0,Constans.WIDTH, Constans.HIGHT);
+        this.instructionsPanel = new InstructionsPanel(0,0,Constans.WINDOW_WIDTH, Constans.WINDOW_HIGHT);
         this.instructionsPanel.getExitButton().addActionListener(panelChencherListner);
         this.add(instructionsPanel);
         instructionsPanel.setVisible(false);
         this.repaint();
         changePannel();
+        Insets insets = this.getInsets();
+       // System.out.println(insets.top + "top  inset  bot" + insets.bottom);
 
     }
 

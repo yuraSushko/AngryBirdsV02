@@ -2,9 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.File;
 import java.io.IOException;
+
 
 public class Character extends JComponent {
     private int sizeWidth;
@@ -12,7 +11,10 @@ public class Character extends JComponent {
     private int x;
     private int y;
     private int timePartInFalling;
+    private int moveUpIncremet;
+    private int moveRightIncremet;
     private BufferedImage regualrBirdImapge;
+    private boolean wasLunched;
 
     public Character(int sizeWidth, int sizeHight,int x, int y, String imagePath) {
         this.sizeWidth = sizeWidth;
@@ -20,23 +22,38 @@ public class Character extends JComponent {
         this.x=x;
         this.y=y;
         this.timePartInFalling=0;
-        //regualrBirdImapge= new ImageIcon("resources/angryBirdsOpeneing.jpg"/*resources/angryBirdsMainBirdPic.png"*/).getImage();
+        this.moveRightIncremet=0;
+        this.moveUpIncremet=0;
+        this.wasLunched=false;
         try {
-            regualrBirdImapge =ImageIO.read(getClass().getResource(imagePath /*"resources/angryBirdsMainBirdPic_transperent.png"*/));
+            regualrBirdImapge =ImageIO.read(getClass().getResource(imagePath));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
+
+
+
+
+    public void setMoveUpIncremet(int moveUpIncremet) {
+        this.moveUpIncremet = moveUpIncremet;
+    }
+
+    public void setMoveRightIncremet(int moveRightIncremet) {
+        this.moveRightIncremet = moveRightIncremet;
+    }
+
     void gravity(){
-        // if in collision with pillers then not active and set timePartInFalling=0
         // else if bottom of screen
         // else you can continue fallig
         //timePartInFalling++;
+
         if(this.x>Constans.SLING_SHOT_LOCATION_X+Constans.SLING_SHOT_WIDTH){
-            if(this.y<=Constans.HIGHT - this.sizeHight*4) {
+            //if(this.y + (0.2*timePartInFalling) <= Constans.WINDOW_HIGHT - (this.sizeHight + Constans.WINDOW_INSET) ) {
+            if( !collisionWithBottom()){
                 if(!collisionWithPiller()) {
-                    this.y += 0.1 * timePartInFalling;
+                    this.y += 0.2 * timePartInFalling;
                     timePartInFalling++;
                 }else{timePartInFalling=0;}
             }
@@ -47,8 +64,8 @@ public class Character extends JComponent {
 
     public boolean withinBounds(){
         boolean within = false;
-        if(this.x>= 0 - Constans.WIDTH_CHARACTER*4 && this.x<=Constans.WIDTH){
-            if(this.y>=0-Constans.HIGHT_CHARACTER*4 && this.y<=Constans.WIDTH-Constans.HIGHT_CHARACTER){
+        if(this.x>= 0  && this.x<=Constans.WINDOW_WIDTH){
+            if(this.y>=0-Constans.HIGHT_CHARACTER*4 && this.y<=Constans.WINDOW_WIDTH-Constans.HIGHT_CHARACTER){
                 within=true;
             }
         }
@@ -60,12 +77,20 @@ public class Character extends JComponent {
         for(Rectangle piller : MainScene.terrein.getPillers() ) {
             if (this.getCharacterAsRectangle().intersects(piller)) {
                 collision = true;
+                this.moveRightIncremet=0;
+                this.moveUpIncremet=0;
                 break;
+
             }
         }
         return collision;
     }
 
+
+
+    public boolean collisionWithBottom() {
+        return this.getCharacterAsRectangle().intersects(MainScene.terrein.getBottom());
+   }
 
 
     Rectangle getCharacterAsRectangle(){
@@ -79,6 +104,14 @@ public class Character extends JComponent {
         this.y=y;
     }
 
+
+    public int getMoveUpIncremet() {
+        return moveUpIncremet;
+    }
+
+    public int getMoveRightIncremet() {
+        return moveRightIncremet;
+    }
 
     public void moveUp(int amount){
         this.y+=amount;
@@ -100,15 +133,7 @@ public class Character extends JComponent {
         return y;
     }
 
-    /*
-    public void drawCharacter( Graphics g){
-        g.setColor(Color.GREEN);
-        g.fillOval(this.x,this.y,
-                   Constans.OPP_CHAR_HIGHT,
-                   Constans.OPP_CHAR_HIGHT);
-    }*/
 
-    @Override
     public String toString() {
         return "Character{" +
                 "sizeWidth=" + sizeWidth +

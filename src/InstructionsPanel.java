@@ -36,7 +36,7 @@ public class InstructionsPanel  extends JPanel {
 
     protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.drawImage(this.backroundOpenening,0,0,Constans.WIDTH,Constans.HIGHT,this);
+            g.drawImage(this.backroundOpenening,0,0,Constans.WINDOW_WIDTH,Constans.WINDOW_HIGHT,this);
 
 
         }
