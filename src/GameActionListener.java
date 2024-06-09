@@ -28,7 +28,7 @@ public class GameActionListener implements MouseListener, MouseMotionListener {
             this.currBird = null;
             //this.birds.remove(bird);
             this.birds.remove(currBird);
-            // TODO remove currBird insted
+
         }
 
     }

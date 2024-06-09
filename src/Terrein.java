@@ -16,12 +16,7 @@ public class Terrein  extends JComponent {
         this.pillers = new ArrayList<>();
         this.slingshot = new ArrayList<>();
         grassImg = ImageIO.read(getClass().getResource("resources/grassNew_transperent.png"));
-
-
     }
-
-
-
     void deleteAllPillers(){
         this.pillers.clear();
     }
@@ -88,6 +83,7 @@ public class Terrein  extends JComponent {
 
     void paintSlingshotString(Graphics g , int xStart, int yStart){
         g.setColor(Color.BLACK);
+
         g.drawLine(xStart+Constans.WIDTH_CHARACTER/2,yStart+Constans.HIGHT_CHARACTER/2,
                 Constans.PUT_BIRD_ON_SLIG_X+ Constans.WIDTH_CHARACTER/2,
                 Constans.PUT_BIRD_ON_SLIG_Y+Constans.HIGHT_CHARACTER/2);

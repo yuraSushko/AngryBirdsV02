@@ -51,18 +51,20 @@ public class MainScene extends JPanel {
         super.paintComponent(g);
         g.drawImage(this.backroundMainGame,0,0,Constans.WINDOW_WIDTH,Constans.WINDOW_HIGHT,this);
 
-        for(/*Bird*/ Character c : this.pigs) {
+        for(Character c : this.pigs) {
             c.drawCharacter(g );
         }
         terrein.printPiller(g);
         terrein.printSlingshot(g);
-        for(/*Bird*/ Character bird : this.birds) {
+        for(Character bird : this.birds) {
             bird.drawCharacter(g);
         }
         terrein.printRestBench(g);
         terrein.printBottom(g);
         if(gameActionListener.getCurrBird()!=null) {
-            terrein.paintSlingshotString(g,gameActionListener.getCurrBird().getX(), gameActionListener.getCurrBird().getY());
+            if(gameActionListener.getCurrBird().getX()<=Constans.PUT_BIRD_ON_SLIG_X) {
+                terrein.paintSlingshotString(g, gameActionListener.getCurrBird().getX(), gameActionListener.getCurrBird().getY());
+            }
         }
     }
 
